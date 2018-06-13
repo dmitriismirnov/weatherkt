@@ -1,0 +1,55 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion versions.compileSdk
+    buildToolsVersion versions.buildTools
+    defaultConfig {
+        applicationId "smirnov.dmitrii.weatherkt"
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.targetSdk
+        versionCode versions.versionCode
+        versionName versions.versionName
+
+        buildConfigField "String", "SERVICE_ENDPOINT", '"http://api.openweathermap.org/"'
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    //Support
+    implementation  libraries.supportV7
+    implementation  libraries.supportDesign
+
+    //Play services
+//    implementation  libraries.googleMaps
+
+    //Kotlin
+    implementation  libraries.kotlin
+
+    //Dagger
+    implementation  libraries.dagger
+    kapt            libraries.daggerCompiler
+
+    //Retrofit
+    implementation  libraries.retrofit
+    implementation  libraries.converterGson
+    implementation  libraries.loggingInterceptor
+    implementation  libraries.retrofitRxAdapter
+
+    //RxJava
+    implementation  libraries.rxJava2
+    implementation  libraries.rxAndroid
+
+    //Moxy
+    implementation  libraries.moxy
+    kapt            libraries.moxyCompiler
+
+}
