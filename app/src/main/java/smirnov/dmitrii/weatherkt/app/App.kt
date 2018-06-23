@@ -4,6 +4,7 @@ import android.app.Application
 import smirnov.dmitrii.weatherkt.di.component.AppComponent
 import smirnov.dmitrii.weatherkt.di.component.DaggerAppComponent
 import smirnov.dmitrii.weatherkt.di.module.AppModule
+import smirnov.dmitrii.weatherkt.di.module.NetworkModule
 
 /**
  * @author Дмитрий
@@ -11,6 +12,7 @@ import smirnov.dmitrii.weatherkt.di.module.AppModule
  */
 
 class App : Application() {
+
     val appComponent: AppComponent by lazy {
         DaggerAppComponent.builder()
                 .appModule(AppModule(this))
@@ -25,4 +27,5 @@ class App : Application() {
     private fun initInjector() {
         appComponent.inject(this)
     }
+
 }

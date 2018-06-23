@@ -29,7 +29,7 @@ dependencies {
     implementation  libraries.supportDesign
 
     //Play services
-//    implementation  libraries.googleMaps
+    implementation  libraries.googleMaps
 
     //Kotlin
     implementation  libraries.kotlin
@@ -52,4 +52,6 @@ dependencies {
     implementation  libraries.moxy
     kapt            libraries.moxyCompiler
 
+    //Picasso
+    implementation  libraries.picasso
 }

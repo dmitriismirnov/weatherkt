@@ -1,57 +1,37 @@
 package smirnov.dmitrii.weatherkt.data.repository
 
-import smirnov.dmitrii.weatherkt.app.system.SchedulersProvider
-import smirnov.dmitrii.weatherkt.network.api.OpenWeatherMapApi
-import javax.inject.Inject
+import io.reactivex.Single
+import smirnov.dmitrii.weatherkt.entity.openweathermap.CurrentWeather
+import smirnov.dmitrii.weatherkt.entity.openweathermap.DaysForecast
 
 /**
  * @author Дмитрий
- * @version 03.06.2018.
+ * @version 23.06.2018.
  */
-class WeatherRepository @Inject constructor(private val api: OpenWeatherMapApi,
-                                            private val schedulers: SchedulersProvider) {
-    fun getCurrentLocationWeather(cityName: String? = null,
-                                  cityId: Long? = null,
-                                  latitude: Double? = null,
-                                  longitude: Double? = null,
-                                  zipCode: String? = null
-    ) = api.getCurrentLocationWeather(
-            cityName,
-            cityId,
-            latitude,
-            longitude,
-            zipCode
-    )
-            .subscribeOn(schedulers.io())
-            .observeOn(schedulers.ui())
+interface WeatherRepository {
 
-    fun getDaysForecast(cityId: Long? = null,
-                        latitude: Double? = null,
-                        longitude: Double? = null,
-                        zipCode: String? = null
-    ) = api.getDaysForecast(
-            cityId,
-            latitude,
-            longitude,
-            zipCode
-    )
-            .subscribeOn(schedulers.io())
-            .observeOn(schedulers.ui())
+    fun getCurrentLocationWeather(
+            cityName: String? = null,
+            cityId: Long? = null,
+            lat: Double? = null,
+            lng: Double? = null,
+            zip: String? = null
+    ): Single<CurrentWeather>
 
-    fun getWeeksForecast(cityName: String? = null,
-                         cityId: Long? = null,
-                         count: Int? = null,
-                         latitude: Double? = null,
-                         longitude: Double? = null,
-                         zipCode: String? = null
-    ) = api.getWeeksForecast(
-            cityName,
-            cityId,
-            count,
-            latitude,
-            longitude,
-            zipCode
-    )
-            .subscribeOn(schedulers.io())
-            .observeOn(schedulers.ui())
+
+    fun getDaysForecast(
+            cityId: Long? = null,
+            lat: Double? = null,
+            lng: Double? = null,
+            zip: String? = null
+    ): Single<DaysForecast>
+
+    fun getWeeksForecast(
+            cityName: String? = null,
+            cityId: Long? = null,
+            count: Int? = null,
+            lat: Double? = null,
+            lng: Double? = null,
+            zip: String? = null
+    ): Single<DaysForecast>
 }

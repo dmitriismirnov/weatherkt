@@ -1,45 +1,16 @@
 package smirnov.dmitrii.weatherkt.data.interaction
 
-import javax.inject.Inject
-import smirnov.dmitrii.weatherkt.data.repository.WeatherRepository
+import io.reactivex.Single
+import smirnov.dmitrii.weatherkt.entity.openweathermap.CurrentWeather
+import smirnov.dmitrii.weatherkt.entity.openweathermap.DaysForecast
 
 /**
  * @author Дмитрий
- * @version 03.06.2018.
+ * @version 23.06.2018.
  */
-class WeatherInteractor @Inject constructor(private val weatherRepository: WeatherRepository) {
-
-    fun getCurrentLocationWeather(latitude: Double,
-                                  longitude: Double
-    ) = weatherRepository.getCurrentLocationWeather(
-            latitude = latitude,
-            longitude = longitude)
-
-    fun getCityWeather(cityName: String
-    ) = weatherRepository.getCurrentLocationWeather(
-            cityName = cityName)
-
-    fun getDaysForecast(cityId: Long,
-                        latitude: Double,
-                        longitude: Double,
-                        zipCode: String
-    ) = weatherRepository.getDaysForecast(
-            cityId = cityId,
-            latitude = latitude,
-            longitude = longitude,
-            zipCode = zipCode)
-
-    fun getWeeksForecast(cityName: String,
-                         cityId: Long,
-                         count: Int,
-                         latitude: Double,
-                         longitude: Double,
-                         zipCode: String
-    ) = weatherRepository.getWeeksForecast(
-            cityName = cityName,
-            cityId = cityId,
-            count = count,
-            latitude = latitude,
-            longitude = longitude,
-            zipCode = zipCode)
+interface WeatherInteractor {
+    fun getWeeksForecast(cityName: String, cityId: Long, count: Int, latitude: Double, longitude: Double, zipCode: String): Single<DaysForecast>?
+    fun getDaysForecast(cityId: Long, latitude: Double, longitude: Double, zipCode: String): Single<DaysForecast>?
+    fun getCityWeather(cityName: String): Single<CurrentWeather>?
+    fun getCurrentLocationWeather(latitude: Double, longitude: Double): Single<CurrentWeather>?
 }

@@ -13,7 +13,8 @@ ext.versions = [
         rxJava2             : "2.1.10",
         rxAndroid           : "2.0.2",
         googleMaps          : "15.0.1",
-        loggingInterceptor  : "3.9.0"
+        loggingInterceptor  : "3.9.0",
+        picasso             : "2.71828"
 ]
 
 ext.libraries = [
@@ -21,6 +22,7 @@ ext.libraries = [
         //Support
         supportV7           : "com.android.support:appcompat-v7:$versions.supportLibs",
         supportDesign       : "com.android.support:design:$versions.supportLibs",
+        supportPercent      : "com.android.support:percent:$versions.supportLibs",
 
         //Play services
         googleMaps          : "com.google.android.gms:play-services-maps:$versions.googleMaps",
@@ -44,5 +46,8 @@ ext.libraries = [
 
         //Moxy
         moxyCompiler        : "com.arello-mobile:moxy-compiler:$versions.moxy",
-        moxy                : "com.arello-mobile:moxy-app-compat:$versions.moxy"
+        moxy                : "com.arello-mobile:moxy-app-compat:$versions.moxy",
+
+        //Picasso
+        picasso             : "com.squareup.picasso:picasso:$versions.picasso"
 ]

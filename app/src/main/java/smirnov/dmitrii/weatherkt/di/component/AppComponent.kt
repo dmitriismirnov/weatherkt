@@ -9,6 +9,7 @@ import smirnov.dmitrii.weatherkt.di.module.InteractionModule
 import smirnov.dmitrii.weatherkt.di.module.NetworkModule
 import smirnov.dmitrii.weatherkt.di.module.RepositoryModule
 import smirnov.dmitrii.weatherkt.network.api.OpenWeatherMapApi
+import smirnov.dmitrii.weatherkt.presentation.screens.details.DetailsPresenter
 import javax.inject.Singleton
 
 /**

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/current"
+            android:checked="true"
+            android:title="Current location" />
+        <item
+            android:id="@+id/search_city"
+            android:title="Search city" />
+        <item
+            android:id="@+id/open_map"
+            android:title="Open map" />
+
+    </group>
+
+</menu>

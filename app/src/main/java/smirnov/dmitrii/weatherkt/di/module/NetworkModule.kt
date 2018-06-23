@@ -23,9 +23,11 @@ class NetworkModule {
     init {
         val okHttpBuilder = OkHttpClient.Builder()
 
-        okHttpBuilder.addInterceptor { chain ->
-            println(chain.request())
-            chain.proceed(chain.request())
+        if (BuildConfig.BUILD_TYPE == "debug") {
+            okHttpBuilder.addInterceptor { chain ->
+                println(chain.request())
+                chain.proceed(chain.request())
+            }
         }
 
         val okHttpClient = okHttpBuilder.build()

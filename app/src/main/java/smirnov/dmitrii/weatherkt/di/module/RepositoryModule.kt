@@ -1,10 +1,9 @@
 package smirnov.dmitrii.weatherkt.di.module
 
+import dagger.Binds
 import dagger.Module
-import dagger.Provides
-import smirnov.dmitrii.weatherkt.app.system.SchedulersProvider
 import smirnov.dmitrii.weatherkt.data.repository.WeatherRepository
-import smirnov.dmitrii.weatherkt.network.api.OpenWeatherMapApi
+import smirnov.dmitrii.weatherkt.data.repository.WeatherRepositoryImpl
 import javax.inject.Singleton
 
 /**
@@ -12,9 +11,8 @@ import javax.inject.Singleton
  * @version 03.06.2018.
  */
 @Module
-class RepositoryModule {
-    @Provides
+abstract class RepositoryModule {
     @Singleton
-    internal fun provideWeatherRepository(api: OpenWeatherMapApi,
-                                          schedulers: SchedulersProvider) = WeatherRepository(api, schedulers)
+    @Binds
+    abstract fun bindWeatherRepository(weatherRepository: WeatherRepositoryImpl) : WeatherRepository
 }
