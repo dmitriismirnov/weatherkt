@@ -19,4 +19,17 @@ abstract class BaseFragment : MvpAppCompatFragment(), MvpView {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) =
             inflater.inflate(getLayout(), container, false)
+
+    fun Double.kelvinToCelsius(kelvin : String) : String {
+        val inKelvin: Double
+        try {
+            inKelvin = java.lang.Double.parseDouble(kelvin)
+        } catch (e: NumberFormatException) {
+            throw e
+        }
+
+        val result = Math.round(inKelvin - 273.15)
+        return result.toString()
+    }
+
 }

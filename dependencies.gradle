@@ -12,9 +12,9 @@ ext.versions = [
         dagger              : "2.9",
         rxJava2             : "2.1.10",
         rxAndroid           : "2.0.2",
-        googleMaps          : "15.0.1",
+        playServices        : "15.0.1",
         loggingInterceptor  : "3.9.0",
-        picasso             : "2.71828"
+        picasso             : "2.5.2"
 ]
 
 ext.libraries = [
@@ -25,8 +25,8 @@ ext.libraries = [
         supportPercent      : "com.android.support:percent:$versions.supportLibs",
 
         //Play services
-        googleMaps          : "com.google.android.gms:play-services-maps:$versions.googleMaps",
-
+        googleMaps          : "com.google.android.gms:play-services-maps:$versions.playServices",
+        serviceLocation    : "com.google.android.gms:play-services-location:$versions.playServices",
         //Kotlin
         kotlin              : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin",
 

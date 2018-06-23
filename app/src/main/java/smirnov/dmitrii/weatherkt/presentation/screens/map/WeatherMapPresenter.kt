@@ -1,6 +1,12 @@
 package smirnov.dmitrii.weatherkt.presentation.screens.map
 
+import android.content.IntentSender
+import android.util.Log
 import com.arellomobile.mvp.InjectViewState
+import com.google.android.gms.common.api.ResolvableApiException
+import com.google.android.gms.location.LocationRequest
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.LocationSettingsRequest
 import smirnov.dmitrii.weatherkt.data.interaction.WeatherInteractor
 import smirnov.dmitrii.weatherkt.presentation.base.BasePresenter
 import javax.inject.Inject
@@ -26,4 +32,6 @@ class WeatherMapPresenter @Inject constructor(private val weatherInteractor: Wea
                 )
                 .connect()
     }
+
+
 }

@@ -10,11 +10,11 @@ import smirnov.dmitrii.weatherkt.data.repository.WeatherRepositoryImpl
  */
 class WeatherInteractorImpl @Inject constructor(private val weatherRepository: WeatherRepository) : WeatherInteractor {
 
-    override fun getCurrentLocationWeather(latitude: Double,
-                                  longitude: Double
+    override fun getCurrentLocationWeather(lat: Double,
+                                  lng: Double
     ) = weatherRepository.getCurrentLocationWeather(
-            lat = latitude,
-            lng = longitude)
+            lat = lat,
+            lng = lng)
 
     override fun getCityWeather(cityName: String
     ) = weatherRepository.getCurrentLocationWeather(

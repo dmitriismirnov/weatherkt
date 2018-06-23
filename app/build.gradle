@@ -30,6 +30,7 @@ dependencies {
 
     //Play services
     implementation  libraries.googleMaps
+    implementation  libraries.serviceLocation
 
     //Kotlin
     implementation  libraries.kotlin
