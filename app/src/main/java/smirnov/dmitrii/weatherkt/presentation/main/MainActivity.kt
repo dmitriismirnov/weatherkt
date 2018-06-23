@@ -7,6 +7,7 @@ import android.view.MenuItem
 import android.widget.Toast
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
+import com.google.android.gms.maps.MapFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import smirnov.dmitrii.weatherkt.R
 import smirnov.dmitrii.weatherkt.app.App
@@ -14,6 +15,7 @@ import smirnov.dmitrii.weatherkt.di.component.DaggerMainComponent
 import smirnov.dmitrii.weatherkt.presentation.base.BaseActivity
 import smirnov.dmitrii.weatherkt.presentation.base.BaseFragment
 import smirnov.dmitrii.weatherkt.presentation.screens.details.DetailsFragment
+import smirnov.dmitrii.weatherkt.presentation.screens.map.WeatherMapFragment
 import javax.inject.Inject
 
 class MainActivity : BaseActivity(), MainView {
@@ -37,11 +39,7 @@ class MainActivity : BaseActivity(), MainView {
                 .inject(this)
 
         super.onCreate(savedInstanceState)
-        try {
-            startDetailedWeather()
-        } catch (e: Exception) {
-            Log.e(localClassName, e.localizedMessage)
-        }
+        startDetailedWeather()
 
     }
 
@@ -68,6 +66,14 @@ class MainActivity : BaseActivity(), MainView {
 
     override fun startDetailedWeather() {
         switchFragment(DetailsFragment())
+    }
+
+    override fun startMap() {
+        switchFragment(WeatherMapFragment())
+    }
+
+    override fun showSearchCity() {
+        toast("showSearchCity")
     }
 
     override fun toast(msg: String) = Toast

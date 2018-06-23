@@ -13,4 +13,6 @@ interface MainView : MvpView {
 
 
     fun startDetailedWeather()
+    fun startMap()
+    fun showSearchCity()
 }

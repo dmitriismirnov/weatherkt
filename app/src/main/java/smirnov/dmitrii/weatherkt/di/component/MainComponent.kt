@@ -5,7 +5,7 @@ import smirnov.dmitrii.weatherkt.di.module.MainModule
 import smirnov.dmitrii.weatherkt.di.scope.PerActivity
 import smirnov.dmitrii.weatherkt.presentation.main.MainActivity
 import smirnov.dmitrii.weatherkt.presentation.screens.details.DetailsFragment
-import smirnov.dmitrii.weatherkt.presentation.screens.details.DetailsPresenter
+import smirnov.dmitrii.weatherkt.presentation.screens.map.WeatherMapFragment
 
 /**
  * @author Дмитрий
@@ -16,4 +16,5 @@ import smirnov.dmitrii.weatherkt.presentation.screens.details.DetailsPresenter
 interface MainComponent {
     fun inject(mainActivity: MainActivity)
     fun inject(detailsFragment: DetailsFragment)
+    fun inject(weatherMapFragment: WeatherMapFragment)
 }

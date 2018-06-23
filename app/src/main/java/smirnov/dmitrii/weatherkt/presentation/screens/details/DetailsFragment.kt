@@ -5,8 +5,10 @@ import android.support.v4.widget.SwipeRefreshLayout
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
+import kotlinx.android.synthetic.main.fragment_detailed_weather.*
 import smirnov.dmitrii.weatherkt.R
 import smirnov.dmitrii.weatherkt.app.App
 import smirnov.dmitrii.weatherkt.di.component.DaggerMainComponent
@@ -18,7 +20,12 @@ import javax.inject.Inject
  * @author Дмитрий
  * @version 16.06.2018.
  */
-class DetailsFragment : BaseFragment(), DetailsView, SwipeRefreshLayout.OnRefreshListener {
+class DetailsFragment : BaseFragment(), DetailsView {
+    override fun showError(it: Throwable) {
+        Toast.makeText(context, it.localizedMessage, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun getLayout() = R.layout.fragment_detailed_weather
 
     @Inject
     @InjectPresenter
@@ -26,6 +33,8 @@ class DetailsFragment : BaseFragment(), DetailsView, SwipeRefreshLayout.OnRefres
 
     @ProvidePresenter
     fun providePresenter() = presenter
+
+    private var currentCity = "Saint Petersburg"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         DaggerMainComponent.builder()
@@ -39,14 +48,28 @@ class DetailsFragment : BaseFragment(), DetailsView, SwipeRefreshLayout.OnRefres
         super.onViewCreated(view, savedInstanceState)
         presenter.testLog("onViewCreated")
     }
-    override fun onRefresh() {
-        presenter.testLog("onRefresh")
+
+    override fun onResume() {
+        super.onResume()
+        swipe_refresh.setOnRefreshListener { onRefresh() }
+    }
+
+    override fun onPause() {
+        swipe_refresh.setOnRefreshListener(null)
+        super.onPause()
+    }
+
+    fun onRefresh() {
+        presenter.requestWeather(currentCity)
+    }
+
+    override fun showProgress(isRefreshing: Boolean) {
+        swipe_refresh.isRefreshing = isRefreshing
     }
 
     override fun showWeather(weather: CurrentWeather) {
         presenter.testLog("show weather")
-        presenter.testLog(weather.toString())
+        testData.text = weather.toString()
     }
 
-    override fun getLayout() = R.layout.fragment_detailed_weather
 }

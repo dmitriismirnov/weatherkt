@@ -17,11 +17,11 @@ class MainPresenter @Inject constructor(private val weatherInteractor: WeatherIn
     }
 
     fun showSearchCity() {
-        viewState.toast("showSearchCity")
+        viewState.showSearchCity()
     }
 
     fun showMap() {
-        viewState.toast("showMap")
+        viewState.startMap()
     }
 
 }

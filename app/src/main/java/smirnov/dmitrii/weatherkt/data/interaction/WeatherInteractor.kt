@@ -9,8 +9,8 @@ import smirnov.dmitrii.weatherkt.entity.openweathermap.DaysForecast
  * @version 23.06.2018.
  */
 interface WeatherInteractor {
-    fun getWeeksForecast(cityName: String, cityId: Long, count: Int, latitude: Double, longitude: Double, zipCode: String): Single<DaysForecast>?
-    fun getDaysForecast(cityId: Long, latitude: Double, longitude: Double, zipCode: String): Single<DaysForecast>?
-    fun getCityWeather(cityName: String): Single<CurrentWeather>?
-    fun getCurrentLocationWeather(latitude: Double, longitude: Double): Single<CurrentWeather>?
+    fun getWeeksForecast(cityName: String, cityId: Long, count: Int, latitude: Double, longitude: Double, zipCode: String): Single<DaysForecast>
+    fun getDaysForecast(cityId: Long, latitude: Double, longitude: Double, zipCode: String): Single<DaysForecast>
+    fun getCityWeather(cityName: String): Single<CurrentWeather>
+    fun getCurrentLocationWeather(lat: Double, lng: Double): Single<CurrentWeather>
 }

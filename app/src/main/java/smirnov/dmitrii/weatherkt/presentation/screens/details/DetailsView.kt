@@ -10,5 +10,6 @@ import smirnov.dmitrii.weatherkt.entity.openweathermap.CurrentWeather
  */
 interface DetailsView : MvpView {
     fun showWeather(weather: CurrentWeather)
-
+    fun showProgress(isRefreshing : Boolean)
+    fun showError(it: Throwable)
 }

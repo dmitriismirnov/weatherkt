@@ -11,9 +11,21 @@ import javax.inject.Inject
  * @version 16.06.2018.
  */
 @InjectViewState
-class DetailsPresenter @Inject constructor(private val weatherInteractor: WeatherInteractor): BasePresenter<DetailsView>() {
+class DetailsPresenter @Inject constructor(private val weatherInteractor: WeatherInteractor) : BasePresenter<DetailsView>() {
 
-    fun testLog(msg : String){
+    fun testLog(msg: String) {
         Log.d(javaClass.simpleName, msg)
+    }
+
+    fun requestWeather(city: String) {
+        weatherInteractor
+                .getCityWeather(city)
+                .doOnSubscribe { viewState.showProgress(true) }
+                .doAfterTerminate { viewState.showProgress(false) }
+                .subscribe(
+                        { viewState.showWeather(it)},
+                        { viewState.showError(it)}
+                )
+                .connect()
     }
 }
