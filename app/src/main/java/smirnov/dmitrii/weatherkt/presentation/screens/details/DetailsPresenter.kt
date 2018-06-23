@@ -17,14 +17,18 @@ class DetailsPresenter @Inject constructor(private val weatherInteractor: Weathe
         Log.d(javaClass.simpleName, msg)
     }
 
+    init{
+        requestWeather("Saint Petersburg")
+    }
+
     fun requestWeather(city: String) {
         weatherInteractor
                 .getCityWeather(city)
                 .doOnSubscribe { viewState.showProgress(true) }
                 .doAfterTerminate { viewState.showProgress(false) }
                 .subscribe(
-                        { viewState.showWeather(it)},
-                        { viewState.showError(it)}
+                        { viewState.showWeather(it) },
+                        { viewState.showError(it) }
                 )
                 .connect()
     }

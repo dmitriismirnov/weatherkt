@@ -1,13 +1,11 @@
 package smirnov.dmitrii.weatherkt.presentation.screens.details
 
 import android.os.Bundle
-import android.support.v4.widget.SwipeRefreshLayout
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_detailed_weather.*
 import smirnov.dmitrii.weatherkt.R
 import smirnov.dmitrii.weatherkt.app.App
@@ -46,7 +44,7 @@ class DetailsFragment : BaseFragment(), DetailsView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        presenter.testLog("onViewCreated")
+//        presenter.init()
     }
 
     override fun onResume() {
@@ -68,8 +66,30 @@ class DetailsFragment : BaseFragment(), DetailsView {
     }
 
     override fun showWeather(weather: CurrentWeather) {
-        presenter.testLog("show weather")
-        testData.text = weather.toString()
+        presenter.testLog(weather.toString())
+
+        Picasso.with(context).load(weather.weatherList?.first()?.icon?.toIconUrl()).into(frag_curr_temp_icon)
+        frag_curr_description.text = weather.weatherList?.first()?.description
+        frag_curr_temp.text = weather.main?.temp?.toCelsiusString()
+        frag_curr_temp_max.text = String.format(getString(R.string.max),
+                weather.main?.tempMax?.toCelsiusString())
+        frag_curr_temp_min.text = String.format(getString(R.string.min),
+                weather.main?.tempMin?.toCelsiusString())
+        frag_curr_wind.text = String.format(getString(R.string.wind),
+                weather.wind?.deg?.toDegreeString())
+        frag_curr_wind_deg.text = String.format(getString(R.string.direction),
+                weather.wind?.deg.toString(), getString(R.string.directionUnit))
+        frag_curr_wind_speed.text = String.format(getString(R.string.speed),
+                weather.wind?.speed.toString(), getString(R.string.speedUnit))
+        frag_curr_humidity.text = String.format(getString(R.string.humidity),
+                weather.main?.humidity.toString(), getString(R.string.humidityUnit))
+        frag_curr_pressure.text = String.format(getString(R.string.pressure),
+                weather.main?.pressure.toString(), getString(R.string.pressureUnit))
+        frag_curr_sunrise.text = String.format(getString(R.string.sunrise),
+                weather.sys?.sunrise?.toTimeString())
+        frag_curr_sunset.text = String.format(getString(R.string.sunset),
+                weather.sys?.sunset?.toTimeString())
+
     }
 
 }
