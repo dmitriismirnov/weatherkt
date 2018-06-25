@@ -68,26 +68,26 @@ class DetailsFragment : BaseFragment(), DetailsView {
     override fun showWeather(weather: CurrentWeather) {
         presenter.testLog(weather.toString())
 
-        Picasso.with(context).load(weather.weatherList?.first()?.icon?.toIconUrl()).into(frag_curr_temp_icon)
-        frag_curr_description.text = weather.weatherList?.first()?.description
-        frag_curr_temp.text = weather.main?.temp?.toCelsiusString()
-        frag_curr_temp_max.text = String.format(getString(R.string.max),
+        Picasso.with(context).load(weather.weatherList?.first()?.icon?.toIconUrl()).into(weather_icon)
+        description.text = weather.weatherList?.first()?.description
+        temperature.text = weather.main?.temp?.toCelsiusString()
+        temperature_max.text = String.format(getString(R.string.max),
                 weather.main?.tempMax?.toCelsiusString())
-        frag_curr_temp_min.text = String.format(getString(R.string.min),
+        temperature_min.text = String.format(getString(R.string.min),
                 weather.main?.tempMin?.toCelsiusString())
-        frag_curr_wind.text = String.format(getString(R.string.wind),
+        wind.text = String.format(getString(R.string.wind),
                 weather.wind?.deg?.toDegreeString())
-        frag_curr_wind_deg.text = String.format(getString(R.string.direction),
+        wind_deg.text = String.format(getString(R.string.direction),
                 weather.wind?.deg.toString(), getString(R.string.directionUnit))
-        frag_curr_wind_speed.text = String.format(getString(R.string.speed),
+        wind_speed.text = String.format(getString(R.string.speed),
                 weather.wind?.speed.toString(), getString(R.string.speedUnit))
-        frag_curr_humidity.text = String.format(getString(R.string.humidity),
+        humidity.text = String.format(getString(R.string.humidity),
                 weather.main?.humidity.toString(), getString(R.string.humidityUnit))
-        frag_curr_pressure.text = String.format(getString(R.string.pressure),
+        pressure.text = String.format(getString(R.string.pressure),
                 weather.main?.pressure.toString(), getString(R.string.pressureUnit))
-        frag_curr_sunrise.text = String.format(getString(R.string.sunrise),
+        sunrise.text = String.format(getString(R.string.sunrise),
                 weather.sys?.sunrise?.toTimeString())
-        frag_curr_sunset.text = String.format(getString(R.string.sunset),
+        sunset.text = String.format(getString(R.string.sunset),
                 weather.sys?.sunset?.toTimeString())
 
     }

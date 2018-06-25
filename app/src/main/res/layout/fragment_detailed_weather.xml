@@ -15,127 +15,129 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/frag_curr_temp"
+                android:id="@+id/temperature"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_margin"
+                android:layout_marginStart="@dimen/default_margin"
                 android:gravity="center"
                 android:textSize="@dimen/text_size_temperature"
-                tools:text="@string/celsius" />
+                tools:text="25 °C" />
 
             <ImageView
-                android:id="@+id/frag_curr_temp_icon"
+                android:id="@+id/weather_icon"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
-                android:layout_alignBottom="@id/frag_curr_temp"
-                android:layout_alignTop="@id/frag_curr_temp"
-                android:layout_toEndOf="@id/frag_curr_temp"
+                android:layout_alignBottom="@id/temperature"
+                android:layout_alignTop="@id/temperature"
+                android:layout_toEndOf="@id/temperature"
                 android:scaleType="fitStart"
-                android:src="@drawable/v_ic_weather" />
+                tools:src="@drawable/v_ic_weather" />
 
             <TextView
-                android:id="@+id/frag_curr_temp_min"
+                android:id="@+id/temperature_min"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/frag_curr_temp"
+                android:layout_below="@id/temperature"
                 android:layout_marginStart="@dimen/default_margin"
-                android:text="@string/min"
-                android:textSize="@dimen/text_size_small" />
+                android:textSize="@dimen/text_size_small"
+                tools:text="@string/min" />
 
             <TextView
-                android:id="@+id/frag_curr_temp_max"
+                android:id="@+id/temperature_max"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/frag_curr_temp_min"
+                android:layout_below="@id/temperature_min"
                 android:layout_marginStart="@dimen/default_margin"
                 android:layout_marginTop="@dimen/small_margin"
-                android:text="@string/max"
-                android:textSize="@dimen/text_size_small" />
+                android:textSize="@dimen/text_size_small"
+                tools:text="@string/max" />
 
             <TextView
-                android:id="@+id/frag_curr_description"
+                android:id="@+id/description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/frag_curr_temp_icon"
+                android:layout_below="@id/weather_icon"
                 android:layout_marginStart="@dimen/default_margin"
-                android:layout_toEndOf="@id/frag_curr_temp"
+                android:layout_toEndOf="@id/temperature"
                 android:gravity="center"
-                android:text="@string/description"
-                android:textSize="@dimen/text_size_default" />
+                android:textSize="@dimen/text_size_default"
+                tools:text="@string/description" />
 
             <TextView
-                android:id="@+id/frag_curr_divider0"
+                android:id="@+id/divider"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_below="@id/frag_curr_temp_max"
+                android:layout_below="@id/temperature_max"
                 android:layout_marginLeft="@dimen/default_margin"
                 android:layout_marginRight="@dimen/default_margin"
                 android:layout_marginTop="@dimen/default_margin"
                 android:background="@color/colorPrimaryDark" />
 
             <TextView
-                android:id="@+id/frag_curr_wind"
+                android:id="@+id/wind"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/frag_curr_divider0"
+                android:layout_below="@id/divider"
                 android:layout_marginStart="@dimen/default_margin"
                 android:layout_marginTop="@dimen/default_margin"
-                android:text="@string/wind"
-                android:textSize="@dimen/text_size_small" />
+                android:textSize="@dimen/text_size_small"
+                tools:text="@string/wind" />
 
             <TextView
-                android:id="@+id/frag_curr_wind_speed"
+                android:id="@+id/wind_speed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/frag_curr_wind"
+                android:layout_below="@id/wind"
                 android:layout_marginStart="@dimen/default_margin"
-                android:text="@string/speed"
-                android:textSize="@dimen/text_size_small" />
+                android:textSize="@dimen/text_size_small"
+                tools:text="@string/speed" />
 
             <TextView
-                android:id="@+id/frag_curr_wind_deg"
+                android:id="@+id/wind_deg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/frag_curr_wind_speed"
+                android:layout_below="@id/wind_speed"
                 android:layout_marginStart="@dimen/default_margin"
                 android:text="@string/direction"
                 android:textSize="@dimen/text_size_small" />
 
             <TextView
-                android:id="@+id/frag_curr_humidity"
+                android:id="@+id/humidity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:layout_below="@id/frag_curr_divider0"
+                android:layout_below="@id/divider"
                 android:layout_margin="@dimen/default_margin"
                 android:text="@string/humidity"
                 android:textSize="@dimen/text_size_small" />
 
             <TextView
-                android:id="@+id/frag_curr_pressure"
+                android:id="@+id/pressure"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:layout_below="@id/frag_curr_wind_speed"
+                android:layout_below="@id/wind_speed"
                 android:layout_marginEnd="@dimen/default_margin"
                 android:text="@string/pressure"
                 android:textSize="@dimen/text_size_small" />
 
 
             <TextView
-                android:id="@+id/frag_curr_sunrise"
+                android:id="@+id/sunrise"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/frag_curr_wind_deg"
+                android:layout_below="@id/wind_deg"
                 android:layout_marginStart="@dimen/default_margin"
                 android:layout_marginTop="@dimen/default_margin"
                 android:text="@string/sunrise"
                 android:textSize="@dimen/text_size_small" />
 
             <TextView
-                android:id="@+id/frag_curr_sunset"
+                android:id="@+id/sunset"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/frag_curr_sunrise"
+                android:layout_below="@id/sunrise"
                 android:layout_marginStart="@dimen/default_margin"
                 android:text="@string/sunset"
                 android:textSize="@dimen/text_size_small" />

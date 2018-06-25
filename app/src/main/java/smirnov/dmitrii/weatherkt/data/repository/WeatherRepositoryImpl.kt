@@ -55,4 +55,5 @@ class WeatherRepositoryImpl @Inject constructor(private val api: OpenWeatherMapA
     )
             .subscribeOn(schedulers.io())
             .observeOn(schedulers.ui())
+
 }
