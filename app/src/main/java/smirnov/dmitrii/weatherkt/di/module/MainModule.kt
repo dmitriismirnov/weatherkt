@@ -1,11 +1,13 @@
 package smirnov.dmitrii.weatherkt.di.module
 
+import android.content.SharedPreferences
 import dagger.Module
 import dagger.Provides
 import smirnov.dmitrii.weatherkt.data.interaction.WeatherInteractor
-import smirnov.dmitrii.weatherkt.di.scope.PerActivity
 import smirnov.dmitrii.weatherkt.presentation.main.MainPresenter
 import smirnov.dmitrii.weatherkt.presentation.screens.details.DetailsPresenter
+import smirnov.dmitrii.weatherkt.presentation.screens.map.WeatherMapPresenter
+import javax.inject.Singleton
 
 /**
  * @author Дмитрий
@@ -13,11 +15,17 @@ import smirnov.dmitrii.weatherkt.presentation.screens.details.DetailsPresenter
  */
 @Module
 class MainModule {
-    @PerActivity
+    @Singleton
     @Provides
     internal fun provideMainPresenter(weatherInteractor: WeatherInteractor) = MainPresenter(weatherInteractor)
 
-    @PerActivity
+    @Singleton
     @Provides
-    internal fun provideDetailsPresenter(weatherInteractor: WeatherInteractor) = DetailsPresenter(weatherInteractor)
+    internal fun provideDetailsPresenter(weatherInteractor: WeatherInteractor,
+                                         sharedPreferences: SharedPreferences) = DetailsPresenter(weatherInteractor, sharedPreferences)
+
+    @Singleton
+    @Provides
+    internal fun provideWeatherMapPresenter(weatherInteractor: WeatherInteractor,
+                                         sharedPreferences: SharedPreferences) = WeatherMapPresenter(weatherInteractor, sharedPreferences)
 }

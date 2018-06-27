@@ -1,6 +1,7 @@
 package smirnov.dmitrii.weatherkt.presentation.screens.map
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.IntentSender
 import android.content.pm.PackageManager
@@ -21,13 +22,12 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import kotlinx.android.synthetic.main.fragment_map.*
 import smirnov.dmitrii.weatherkt.R
 import smirnov.dmitrii.weatherkt.app.App
-import smirnov.dmitrii.weatherkt.di.component.DaggerMainComponent
 import smirnov.dmitrii.weatherkt.entity.openweathermap.CurrentWeather
 import smirnov.dmitrii.weatherkt.presentation.base.BaseFragment
 import smirnov.dmitrii.weatherkt.presentation.common.dialogs.ProgressDialogFragment
+import smirnov.dmitrii.weatherkt.presentation.screens.details.DetailsFragment
 import smirnov.dmitrii.weatherkt.presentation.widgets.PointDetailsWindow
 import javax.inject.Inject
 
@@ -63,13 +63,8 @@ class WeatherMapFragment : BaseFragment(), WeatherMapView {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        DaggerMainComponent.builder()
-                .appComponent((activity!!.application as App).appComponent)
-                .build()
-                .inject(this)
+        App.appComponent.inject(this)
         super.onCreate(savedInstanceState)
-
-
     }
 
     override fun onResume() {
@@ -192,13 +187,20 @@ class WeatherMapFragment : BaseFragment(), WeatherMapView {
                         .title(name)
                         .snippet(base)
 
-                val mapInfoWindow = PointDetailsWindow(context!!, currentWeather)
+
+                val mapInfoWindow = PointDetailsWindow(
+                        context!!,
+                        currentWeather
+                )
 
                 googleMap.setInfoWindowAdapter(mapInfoWindow)
 
                 googleMap.addMarker(markerOptions)
                         .showInfoWindow()
 
+                googleMap.setOnInfoWindowClickListener {
+                    currentWeather.name?.let { it1 -> showDetailsScreen(it1) }
+                }
             }
         }
     }
@@ -213,15 +215,27 @@ class WeatherMapFragment : BaseFragment(), WeatherMapView {
                         .title(name)
                         .snippet(base)
 
-                val mapInfoWindow = PointDetailsWindow(context!!, weather)
+                val mapInfoWindow = PointDetailsWindow(
+                        context!!,
+                        weather
+                )
+
 
                 googleMap.setInfoWindowAdapter(mapInfoWindow)
 
                 googleMap.addMarker(markerOptions)
                         .showInfoWindow()
 
+                googleMap.setOnInfoWindowClickListener {
+                    weather.name?.let { it1 -> showDetailsScreen(it1) }
+                }
+
             }
         }
+    }
+
+    fun showDetailsScreen(city: String) {
+        activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.container, DetailsFragment())?.commit()
     }
 
     override fun showError(error: Throwable) =

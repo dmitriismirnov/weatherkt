@@ -10,27 +10,28 @@ import com.google.android.gms.maps.model.Marker
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.window_point_details.view.*
 import smirnov.dmitrii.weatherkt.R
+import smirnov.dmitrii.weatherkt.app.App
 import smirnov.dmitrii.weatherkt.entity.openweathermap.CurrentWeather
 
 /**
  * @author Дмитрий
  * @version 23.06.2018.
  */
-class PointDetailsWindow(private var context: Context, private var weather: CurrentWeather) : GoogleMap.InfoWindowAdapter {
+class PointDetailsWindow(private var context: Context, private val weather: CurrentWeather) : GoogleMap.InfoWindowAdapter {
 
     @SuppressLint("SetTextI18n")
     override fun getInfoContents(marker: Marker?): View {
 
         val view = LayoutInflater.from(context).inflate(R.layout.window_point_details, null)
+
+        val iconUrl = "http://openweathermap.org/img/w/" + weather.weatherList?.first()?.icon + ".png"
+        Picasso.with(context).load(iconUrl).into(view.iconView)
+
         view.locationName.text = weather.name
 
         val temp = kelvinToCelsius(weather.main?.temp.toString())
 
         view.temperature.text = "$temp °C"
-
-        val iconUrl = "http://openweathermap.org/img/w/" + weather.weatherList?.first()?.icon + ".png"
-        Log.d("PointDetailsWindow", iconUrl)
-        Picasso.with(context).load(iconUrl).into(view.iconView)
         return view
 
     }

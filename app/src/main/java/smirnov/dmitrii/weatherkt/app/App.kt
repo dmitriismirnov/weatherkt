@@ -1,6 +1,7 @@
 package smirnov.dmitrii.weatherkt.app
 
 import android.app.Application
+import android.content.Context
 import smirnov.dmitrii.weatherkt.di.component.AppComponent
 import smirnov.dmitrii.weatherkt.di.component.DaggerAppComponent
 import smirnov.dmitrii.weatherkt.di.module.AppModule
@@ -13,14 +14,15 @@ import smirnov.dmitrii.weatherkt.di.module.NetworkModule
 
 class App : Application() {
 
-    val appComponent: AppComponent by lazy {
-        DaggerAppComponent.builder()
-                .appModule(AppModule(this))
-                .build()
+    companion object {
+        lateinit var appComponent: AppComponent
     }
 
     override fun onCreate() {
         super.onCreate()
+        appComponent = DaggerAppComponent.builder()
+                .appModule(AppModule(this))
+                .build()
         initInjector()
     }
 

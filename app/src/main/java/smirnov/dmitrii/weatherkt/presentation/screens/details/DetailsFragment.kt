@@ -9,7 +9,6 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_detailed_weather.*
 import smirnov.dmitrii.weatherkt.R
 import smirnov.dmitrii.weatherkt.app.App
-import smirnov.dmitrii.weatherkt.di.component.DaggerMainComponent
 import smirnov.dmitrii.weatherkt.entity.openweathermap.CurrentWeather
 import smirnov.dmitrii.weatherkt.presentation.base.BaseFragment
 import javax.inject.Inject
@@ -35,21 +34,14 @@ class DetailsFragment : BaseFragment(), DetailsView {
     private var currentCity = "Saint Petersburg"
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        DaggerMainComponent.builder()
-                .appComponent((activity!!.application as App).appComponent)
-                .build()
-                .inject(this)
+        App.appComponent.inject(this)
         super.onCreate(savedInstanceState)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-//        presenter.init()
     }
 
     override fun onResume() {
         super.onResume()
         swipe_refresh.setOnRefreshListener { onRefresh() }
+        presenter.requestWeather()
     }
 
     override fun onPause() {
@@ -58,7 +50,7 @@ class DetailsFragment : BaseFragment(), DetailsView {
     }
 
     fun onRefresh() {
-        presenter.requestWeather(currentCity)
+        presenter.requestWeather()
     }
 
     override fun showProgress(isRefreshing: Boolean) {
@@ -69,6 +61,7 @@ class DetailsFragment : BaseFragment(), DetailsView {
         presenter.testLog(weather.toString())
 
         Picasso.with(context).load(weather.weatherList?.first()?.icon?.toIconUrl()).into(weather_icon)
+        city.text = weather.name
         description.text = weather.weatherList?.first()?.description
         temperature.text = weather.main?.temp?.toCelsiusString()
         temperature_max.text = String.format(getString(R.string.max),

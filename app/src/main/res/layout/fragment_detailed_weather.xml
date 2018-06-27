@@ -15,11 +15,21 @@
             android:layout_height="match_parent">
 
             <TextView
+                android:id="@+id/city"
+                tools:text="City"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginTop="@dimen/default_margin"
+                android:textSize="@dimen/text_size_default" />
+
+            <TextView
                 android:id="@+id/temperature"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/default_margin"
+                android:layout_below="@id/city"
                 android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginTop="@dimen/default_margin"
                 android:gravity="center"
                 android:textSize="@dimen/text_size_temperature"
                 tools:text="25 °C" />
@@ -64,7 +74,7 @@
                 android:textSize="@dimen/text_size_default"
                 tools:text="@string/description" />
 
-            <TextView
+            <View
                 android:id="@+id/divider"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -99,7 +109,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/wind_speed"
                 android:layout_marginStart="@dimen/default_margin"
-                android:text="@string/direction"
+                tools:text="@string/direction"
                 android:textSize="@dimen/text_size_small" />
 
             <TextView
@@ -109,7 +119,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_below="@id/divider"
                 android:layout_margin="@dimen/default_margin"
-                android:text="@string/humidity"
+                tools:text="@string/humidity"
                 android:textSize="@dimen/text_size_small" />
 
             <TextView
@@ -119,7 +129,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_below="@id/wind_speed"
                 android:layout_marginEnd="@dimen/default_margin"
-                android:text="@string/pressure"
+                tools:text="@string/pressure"
                 android:textSize="@dimen/text_size_small" />
 
 
@@ -130,7 +140,7 @@
                 android:layout_below="@id/wind_deg"
                 android:layout_marginStart="@dimen/default_margin"
                 android:layout_marginTop="@dimen/default_margin"
-                android:text="@string/sunrise"
+                tools:text="@string/sunrise"
                 android:textSize="@dimen/text_size_small" />
 
             <TextView
@@ -139,7 +149,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/sunrise"
                 android:layout_marginStart="@dimen/default_margin"
-                android:text="@string/sunset"
+                tools:text="@string/sunset"
                 android:textSize="@dimen/text_size_small" />
         </RelativeLayout>
     </android.support.v4.widget.SwipeRefreshLayout>

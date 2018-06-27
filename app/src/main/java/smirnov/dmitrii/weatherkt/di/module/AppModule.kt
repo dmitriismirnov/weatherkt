@@ -2,6 +2,8 @@ package smirnov.dmitrii.weatherkt.di.module
 
 import android.app.Application
 import android.content.Context
+import android.content.SharedPreferences
+import android.preference.PreferenceManager
 import dagger.Module
 import dagger.Provides
 import smirnov.dmitrii.weatherkt.app.system.AppSchedulers
@@ -20,5 +22,9 @@ class AppModule(private val app: Application) {
 
     @Provides
     @Singleton
-    fun provideSchedulerProvider() : SchedulersProvider = AppSchedulers()
+    fun provideSchedulerProvider(): SchedulersProvider = AppSchedulers()
+
+    @Provides
+    @Singleton
+    fun provideSharedPreferences(): SharedPreferences = PreferenceManager.getDefaultSharedPreferences(app.applicationContext)
 }

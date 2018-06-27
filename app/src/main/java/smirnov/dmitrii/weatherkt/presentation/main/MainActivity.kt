@@ -2,16 +2,13 @@ package smirnov.dmitrii.weatherkt.presentation.main
 
 import android.os.Bundle
 import android.support.v4.view.GravityCompat
-import android.util.Log
 import android.view.MenuItem
 import android.widget.Toast
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
-import com.google.android.gms.maps.MapFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import smirnov.dmitrii.weatherkt.R
 import smirnov.dmitrii.weatherkt.app.App
-import smirnov.dmitrii.weatherkt.di.component.DaggerMainComponent
 import smirnov.dmitrii.weatherkt.presentation.base.BaseActivity
 import smirnov.dmitrii.weatherkt.presentation.base.BaseFragment
 import smirnov.dmitrii.weatherkt.presentation.screens.details.DetailsFragment
@@ -33,16 +30,18 @@ class MainActivity : BaseActivity(), MainView {
         get() = supportFragmentManager.findFragmentById(R.id.container) as BaseFragment?
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        DaggerMainComponent.builder()
-                .appComponent((application as App).appComponent)
-                .build()
-                .inject(this)
-
+        App.appComponent.inject(this)
         super.onCreate(savedInstanceState)
         startDetailedWeather()
-
     }
 
+    override fun onBackPressed() {
+        if (drawer_layout.isDrawerOpen(nav_drawer)) {
+            drawer_layout.closeDrawer(GravityCompat.START)
+        } else {
+            super.onBackPressed()
+        }
+    }
 
     override fun onResume() {
         super.onResume()
@@ -65,10 +64,12 @@ class MainActivity : BaseActivity(), MainView {
     }
 
     override fun startDetailedWeather() {
+        if(currentFragment !is DetailsFragment)
         switchFragment(DetailsFragment())
     }
 
     override fun startMap() {
+        if(currentFragment !is WeatherMapFragment)
         switchFragment(WeatherMapFragment())
     }
 

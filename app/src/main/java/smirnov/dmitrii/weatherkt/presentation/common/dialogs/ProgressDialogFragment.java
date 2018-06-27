@@ -24,7 +24,7 @@ public class ProgressDialogFragment extends DialogFragment {
         fmt = newInstance(message);
         fm.beginTransaction()
                 .add(fmt, TAG)
-                .commitNowAllowingStateLoss();
+                .commitAllowingStateLoss();
     }
 
     @SuppressWarnings("UnusedReturnValue")
