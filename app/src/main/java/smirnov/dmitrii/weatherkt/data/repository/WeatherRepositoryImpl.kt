@@ -8,8 +8,10 @@ import javax.inject.Inject
  * @author Дмитрий
  * @version 03.06.2018.
  */
-class WeatherRepositoryImpl @Inject constructor(private val api: OpenWeatherMapApi,
-                                                private val schedulers: SchedulersProvider) : WeatherRepository {
+class WeatherRepositoryImpl @Inject constructor(
+        private val api: OpenWeatherMapApi,
+        private val schedulers: SchedulersProvider
+) : WeatherRepository {
 
     override fun getCurrentLocationWeather(cityName: String?,
                                            cityId: Long?,

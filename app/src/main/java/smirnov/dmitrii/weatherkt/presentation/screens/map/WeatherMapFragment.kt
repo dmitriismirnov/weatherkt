@@ -79,14 +79,10 @@ class WeatherMapFragment : BaseFragment(), WeatherMapView {
         super.onPause()
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        val v = inflater.inflate(getLayout(), null, false)
-
+    override fun initialiseMap(){
         val mapFragment = childFragmentManager
                 .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
-
-        return v
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -205,37 +201,12 @@ class WeatherMapFragment : BaseFragment(), WeatherMapView {
         }
     }
 
-    fun showLocationWeather(weather: CurrentWeather) {
-        googleMap.clear()
-        with(weather) {
-            coordinate?.let {
-                val latLng = LatLng(it.latitude!!, it.longitude!!)
-
-                val markerOptions = MarkerOptions().position(latLng)
-                        .title(name)
-                        .snippet(base)
-
-                val mapInfoWindow = PointDetailsWindow(
-                        context!!,
-                        weather
-                )
-
-
-                googleMap.setInfoWindowAdapter(mapInfoWindow)
-
-                googleMap.addMarker(markerOptions)
-                        .showInfoWindow()
-
-                googleMap.setOnInfoWindowClickListener {
-                    weather.name?.let { it1 -> showDetailsScreen(it1) }
-                }
-
-            }
-        }
-    }
-
     fun showDetailsScreen(city: String) {
-        activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.container, DetailsFragment())?.commit()
+        activity?.
+                supportFragmentManager?.
+                beginTransaction()?.
+                replace(R.id.container, DetailsFragment())?.
+                commitAllowingStateLoss()
     }
 
     override fun showError(error: Throwable) =

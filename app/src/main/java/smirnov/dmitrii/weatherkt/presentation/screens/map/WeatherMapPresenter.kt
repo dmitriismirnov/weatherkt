@@ -20,6 +20,10 @@ import javax.inject.Inject
 @InjectViewState
 class WeatherMapPresenter @Inject constructor(private val weatherInteractor: WeatherInteractor, private val preferences: SharedPreferences) : BasePresenter<WeatherMapView>() {
 
+    init {
+        viewState.initialiseMap()
+    }
+
     fun onPointClicked(lat: Double, lon: Double) {
         requestLocationWeather(lat, lon)
     }

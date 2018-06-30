@@ -41,14 +41,7 @@ abstract class BaseActivity : MvpAppCompatActivity() {
         supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.container, fragment)
-                .commitNow()
-    }
-
-    protected fun removeFragment(fragment: BaseFragment) {
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
-        transaction.remove(fragment)
-        transaction.commit()
+                .commitAllowingStateLoss()
     }
 
     fun showMessageSnackbar(message: Int) {

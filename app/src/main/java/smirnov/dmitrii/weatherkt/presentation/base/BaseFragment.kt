@@ -21,8 +21,28 @@ abstract class BaseFragment : MvpAppCompatFragment(), MvpView {
     @LayoutRes
     protected abstract fun getLayout(): Int
 
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//        savedInstanceState?.let { restoreState(it) }
+//    }
+//
+//    protected open fun restoreState(state: Bundle) {}
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) =
             inflater.inflate(getLayout(), container, false)
+
+/*    protected fun showProgressDialog(progress: Boolean) {
+        if (!isAdded) return
+
+        val fragment = childFragmentManager.findFragmentByTag(PROGRESS_TAG)
+        if (fragment != null && !progress) {
+            (fragment as ProgressDialog).dismissAllowingStateLoss()
+            childFragmentManager.executePendingTransactions()
+        } else if (fragment == null && progress) {
+            ProgressDialog().show(childFragmentManager, PROGRESS_TAG)
+            childFragmentManager.executePendingTransactions()
+        }
+    }*/
 
     fun Double.toCelsiusString(): String {
         val result = Math.round(this - 273.15)
