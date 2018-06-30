@@ -37,5 +37,6 @@
     <string name="unknown">N/A</string>
     <string name="drawer_title_weather">Weather</string>
     <string name="drawer_title_map">Map</string>
-
+    <string name="search_dialog_hint">Enter city here</string>
+    <string name="search_dialog_title">Change location</string>
 </resources>

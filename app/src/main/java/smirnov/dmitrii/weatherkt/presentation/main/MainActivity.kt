@@ -1,6 +1,8 @@
 package smirnov.dmitrii.weatherkt.presentation.main
 
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.support.v4.view.GravityCompat
 import android.view.MenuItem
 import android.widget.Toast
@@ -11,12 +13,14 @@ import smirnov.dmitrii.weatherkt.R
 import smirnov.dmitrii.weatherkt.app.App
 import smirnov.dmitrii.weatherkt.presentation.base.BaseActivity
 import smirnov.dmitrii.weatherkt.presentation.base.BaseFragment
+import smirnov.dmitrii.weatherkt.presentation.base.BasePresenter
+import smirnov.dmitrii.weatherkt.presentation.common.dialogs.SearchDialog
 import smirnov.dmitrii.weatherkt.presentation.screens.details.DetailsFragment
 import smirnov.dmitrii.weatherkt.presentation.screens.map.WeatherMapFragment
 import smirnov.dmitrii.weatherkt.presentation.widgets.NavigationToolbar
 import javax.inject.Inject
 
-class MainActivity : BaseActivity(), MainView, NavigationToolbar.OnToolbarClickListener {
+class MainActivity : BaseActivity(), MainView, NavigationToolbar.OnToolbarClickListener, SearchDialog.OnClickListener {
 
     override fun getLayout() = R.layout.activity_main
 
@@ -26,6 +30,8 @@ class MainActivity : BaseActivity(), MainView, NavigationToolbar.OnToolbarClickL
 
     @ProvidePresenter
     fun providePresenter() = presenter
+
+    private val SEARCH_DIALOG_TAG = "SEARCH_DIALOG_TAG"
 
     private val currentFragment
         get() = supportFragmentManager.findFragmentById(R.id.container) as BaseFragment?
@@ -86,7 +92,24 @@ class MainActivity : BaseActivity(), MainView, NavigationToolbar.OnToolbarClickL
     }
 
     override fun showSearchCity() {
-        toast("showSearchCity")
+        SearchDialog
+                .newInstants(
+                        getString(R.string.search_dialog_title),
+                        getString(R.string.search_dialog_hint),
+                        getString(android.R.string.ok),
+                        getString(android.R.string.cancel),
+                        "search"
+                ).show(supportFragmentManager, SEARCH_DIALOG_TAG)
+
+    }
+
+    override fun onSearchResult(tag: String, city: String) {
+        PreferenceManager
+                .getDefaultSharedPreferences(this)
+                .edit()
+                .putString(BasePresenter.PREFS_CITY, city)
+                .apply()
+        switchFragment(DetailsFragment())
     }
 
     override fun toast(msg: String) = Toast
