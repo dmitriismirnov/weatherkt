@@ -12,6 +12,7 @@ import kotlinx.android.synthetic.main.window_point_details.view.*
 import smirnov.dmitrii.weatherkt.R
 import smirnov.dmitrii.weatherkt.app.App
 import smirnov.dmitrii.weatherkt.entity.openweathermap.CurrentWeather
+import smirnov.dmitrii.weatherkt.extensions.toCelsiusString
 
 /**
  * @author Дмитрий
@@ -29,24 +30,11 @@ class PointDetailsWindow(private var context: Context, private val weather: Curr
 
         view.locationName.text = weather.name
 
-        val temp = kelvinToCelsius(weather.main?.temp.toString())
+        val temp = weather.main?.temp?.toCelsiusString()
 
         view.temperature.text = "$temp °C"
         return view
 
-    }
-
-    @Throws(NumberFormatException::class)
-    fun kelvinToCelsius(kelvin: String): String {
-        val inKelvin: Double
-        try {
-            inKelvin = java.lang.Double.parseDouble(kelvin)
-        } catch (e: NumberFormatException) {
-            throw e
-        }
-
-        val result = Math.round(inKelvin - 273.15).toInt()
-        return result.toString()
     }
 
     override fun getInfoWindow(marker: Marker?) = null

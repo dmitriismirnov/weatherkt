@@ -16,6 +16,7 @@ class App : Application() {
 
     companion object {
         lateinit var appComponent: AppComponent
+        lateinit var appContext: Context
     }
 
     override fun onCreate() {
@@ -23,6 +24,7 @@ class App : Application() {
         appComponent = DaggerAppComponent.builder()
                 .appModule(AppModule(this))
                 .build()
+        appContext = applicationContext
         initInjector()
     }
 

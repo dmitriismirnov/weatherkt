@@ -10,6 +10,10 @@ import kotlinx.android.synthetic.main.fragment_detailed_weather.*
 import smirnov.dmitrii.weatherkt.R
 import smirnov.dmitrii.weatherkt.app.App
 import smirnov.dmitrii.weatherkt.entity.openweathermap.CurrentWeather
+import smirnov.dmitrii.weatherkt.extensions.toCelsiusString
+import smirnov.dmitrii.weatherkt.extensions.toDegreeString
+import smirnov.dmitrii.weatherkt.extensions.toIconUrl
+import smirnov.dmitrii.weatherkt.extensions.toTimeString
 import smirnov.dmitrii.weatherkt.presentation.base.BaseFragment
 import javax.inject.Inject
 
