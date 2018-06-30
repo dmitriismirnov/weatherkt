@@ -1,17 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:checkableBehavior="single">
+    <group android:checkableBehavior="none">
         <item
-            android:id="@+id/current"
-            android:checked="true"
-            android:title="Current location" />
-        <item
-            android:id="@+id/search_city"
-            android:title="Search city" />
+            android:id="@+id/details"
+            android:title="@string/drawer_title_weather" />
+
         <item
             android:id="@+id/open_map"
-            android:title="Open map" />
+            android:title="@string/drawer_title_map" />
 
     </group>
 

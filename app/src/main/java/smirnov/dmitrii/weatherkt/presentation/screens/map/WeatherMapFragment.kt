@@ -202,6 +202,7 @@ class WeatherMapFragment : BaseFragment(), WeatherMapView {
     }
 
     fun showDetailsScreen(city: String) {
+
         activity?.
                 supportFragmentManager?.
                 beginTransaction()?.

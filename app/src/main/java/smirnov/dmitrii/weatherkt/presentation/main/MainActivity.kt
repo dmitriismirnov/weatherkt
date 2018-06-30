@@ -13,9 +13,10 @@ import smirnov.dmitrii.weatherkt.presentation.base.BaseActivity
 import smirnov.dmitrii.weatherkt.presentation.base.BaseFragment
 import smirnov.dmitrii.weatherkt.presentation.screens.details.DetailsFragment
 import smirnov.dmitrii.weatherkt.presentation.screens.map.WeatherMapFragment
+import smirnov.dmitrii.weatherkt.presentation.widgets.NavigationToolbar
 import javax.inject.Inject
 
-class MainActivity : BaseActivity(), MainView {
+class MainActivity : BaseActivity(), MainView, NavigationToolbar.OnToolbarClickListener {
 
     override fun getLayout() = R.layout.activity_main
 
@@ -46,31 +47,42 @@ class MainActivity : BaseActivity(), MainView {
     override fun onResume() {
         super.onResume()
         nav_drawer.setNavigationItemSelectedListener { onNavigationItemSelected(it) }
+        toolbar.setToolbarListener(this)
     }
 
     override fun onPause() {
         nav_drawer.setNavigationItemSelectedListener(null)
+        toolbar.setToolbarListener(null)
         super.onPause()
     }
 
     fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.current -> presenter.showCurrent()
-            R.id.search_city -> presenter.showSearchCity()
+            R.id.details -> presenter.showCurrent()
             R.id.open_map -> presenter.showMap()
         }
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
     }
 
+    override fun onToolbarMenuClick() {
+        if (!drawer_layout.isDrawerOpen(nav_drawer)) {
+            drawer_layout.openDrawer(GravityCompat.START)
+        }
+    }
+
+    override fun onToolbarSearchClick() {
+        presenter.showSearchCity()
+    }
+
     override fun startDetailedWeather() {
-        if(currentFragment !is DetailsFragment)
-        switchFragment(DetailsFragment())
+        if (currentFragment !is DetailsFragment)
+            switchFragment(DetailsFragment())
     }
 
     override fun startMap() {
-        if(currentFragment !is WeatherMapFragment)
-        switchFragment(WeatherMapFragment())
+        if (currentFragment !is WeatherMapFragment)
+            switchFragment(WeatherMapFragment())
     }
 
     override fun showSearchCity() {

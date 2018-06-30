@@ -35,5 +35,7 @@
     <string name="sunrise">"Sunrise: %1$s"</string>
     <string name="sunset">"Sunset: %1$s"</string>
     <string name="unknown">N/A</string>
+    <string name="drawer_title_weather">Weather</string>
+    <string name="drawer_title_map">Map</string>
 
 </resources>
