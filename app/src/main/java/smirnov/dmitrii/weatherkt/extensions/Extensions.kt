@@ -53,7 +53,3 @@ fun Long.toTimeString(): String {
     val d = Date(this)
     return sdf.format(d)
 }
-
-object Extensions {
-
-}
