@@ -11,14 +11,15 @@ import com.arellomobile.mvp.viewstate.strategy.StateStrategyType
  */
 interface MainView : MvpView {
 
+    @StateStrategyType(SkipStrategy::class)
     fun toast(msg: String)
 
-    @StateStrategyType(AddToEndSingleStrategy::class)
+    @StateStrategyType(SkipStrategy::class)
     fun startDetailedWeather()
 
-    @StateStrategyType(AddToEndSingleStrategy::class)
+    @StateStrategyType(SkipStrategy::class)
     fun startMap()
 
-    @StateStrategyType(AddToEndSingleStrategy::class)
+    @StateStrategyType(SkipStrategy::class)
     fun showSearchCity()
 }

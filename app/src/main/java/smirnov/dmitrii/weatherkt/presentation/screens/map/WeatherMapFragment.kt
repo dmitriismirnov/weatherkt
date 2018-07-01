@@ -79,14 +79,13 @@ class WeatherMapFragment : BaseFragment(), WeatherMapView {
         super.onPause()
     }
 
-    override fun initialiseMap(){
+    override fun initialiseMap() {
         val mapFragment = childFragmentManager
                 .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun initialiseLocation() {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(activity!!)
 
         locationCallback = object : LocationCallback() {
@@ -95,17 +94,41 @@ class WeatherMapFragment : BaseFragment(), WeatherMapView {
                 lastLocation = p0.lastLocation
             }
         }
-
         createLocationRequest()
+    }
+
+    private fun createLocationRequest() {
+        locationRequest = LocationRequest()
+        locationRequest.interval = 10000
+        locationRequest.fastestInterval = 5000
+        locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+
+        val builder = LocationSettingsRequest.Builder()
+                .addLocationRequest(locationRequest)
+        val client = LocationServices.getSettingsClient(activity!!)
+        val task = client.checkLocationSettings(builder.build())
+
+        task.addOnSuccessListener {
+            startLocationUpdates()
+        }
+        task.addOnFailureListener { e ->
+            if (e is ResolvableApiException) {
+                try {
+                    e.startResolutionForResult(activity, REQUEST_CHECK_SETTINGS)
+                } catch (sendEx: IntentSender.SendIntentException) {
+                    Log.d(this.tag, sendEx.message)
+                }
+            }
+        }
     }
 
     override fun onMapReady(map: GoogleMap) {
         googleMap = map
         googleMap.uiSettings.isZoomControlsEnabled = true
+        setUpMap()
         googleMap.setOnMapClickListener { point ->
             presenter.onPointClicked(point.latitude, point.longitude)
         }
-        setUpMap()
     }
 
     private fun setUpMap() {
@@ -129,6 +152,7 @@ class WeatherMapFragment : BaseFragment(), WeatherMapView {
     }
 
     private fun startLocationUpdates() {
+        locationUpdateState = true
         if (ActivityCompat.checkSelfPermission(context!!,
                         android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(activity!!,
@@ -137,32 +161,6 @@ class WeatherMapFragment : BaseFragment(), WeatherMapView {
             return
         }
         fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null)
-    }
-
-    private fun createLocationRequest() {
-        locationRequest = LocationRequest()
-        locationRequest.interval = 10000
-        locationRequest.fastestInterval = 5000
-        locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-
-        val builder = LocationSettingsRequest.Builder()
-                .addLocationRequest(locationRequest)
-        val client = LocationServices.getSettingsClient(activity!!)
-        val task = client.checkLocationSettings(builder.build())
-
-        task.addOnSuccessListener {
-            locationUpdateState = true
-            startLocationUpdates()
-        }
-        task.addOnFailureListener { e ->
-            if (e is ResolvableApiException) {
-                try {
-                    e.startResolutionForResult(activity, REQUEST_CHECK_SETTINGS)
-                } catch (sendEx: IntentSender.SendIntentException) {
-                    Log.d(this.tag, sendEx.message)
-                }
-            }
-        }
     }
 
     override fun showProgress(isRefreshing: Boolean) {
@@ -201,14 +199,11 @@ class WeatherMapFragment : BaseFragment(), WeatherMapView {
         }
     }
 
-    fun showDetailsScreen(city: String) {
-
-        activity?.
-                supportFragmentManager?.
-                beginTransaction()?.
-                replace(R.id.container, DetailsFragment())?.
-                commitAllowingStateLoss()
-    }
+    fun showDetailsScreen(city: String) = activity
+            ?.supportFragmentManager
+            ?.beginTransaction()
+            ?.replace(R.id.container, DetailsFragment())
+            ?.commitAllowingStateLoss()
 
     override fun showError(error: Throwable) =
             Toast.makeText(context, error.localizedMessage, Toast.LENGTH_SHORT).show()
@@ -218,7 +213,6 @@ class WeatherMapFragment : BaseFragment(), WeatherMapView {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_CHECK_SETTINGS) {
             if (resultCode == Activity.RESULT_OK) {
-                locationUpdateState = true
                 startLocationUpdates()
             }
         }

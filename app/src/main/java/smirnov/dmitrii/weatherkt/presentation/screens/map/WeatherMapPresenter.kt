@@ -22,6 +22,7 @@ class WeatherMapPresenter @Inject constructor(private val weatherInteractor: Wea
 
     init {
         viewState.initialiseMap()
+        viewState.initialiseLocation()
     }
 
     fun onPointClicked(lat: Double, lon: Double) {

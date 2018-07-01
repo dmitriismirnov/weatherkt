@@ -12,6 +12,10 @@ import javax.inject.Inject
 @InjectViewState
 class MainPresenter @Inject constructor(private val weatherInteractor: WeatherInteractor) : BasePresenter<MainView>() {
 
+    override fun onFirstViewAttach() {
+        viewState.startDetailedWeather()
+    }
+
     fun showCurrent() {
         viewState.startDetailedWeather()
     }

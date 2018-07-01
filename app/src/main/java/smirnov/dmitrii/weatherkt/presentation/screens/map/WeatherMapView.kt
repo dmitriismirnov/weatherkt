@@ -23,4 +23,7 @@ interface WeatherMapView : MvpView, OnMapReadyCallback {
 
     @StateStrategyType(AddToEndSingleStrategy::class)
     fun initialiseMap()
+
+    @StateStrategyType(AddToEndSingleStrategy::class)
+    fun initialiseLocation()
 }

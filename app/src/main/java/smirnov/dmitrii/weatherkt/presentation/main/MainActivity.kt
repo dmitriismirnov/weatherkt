@@ -38,7 +38,6 @@ class MainActivity : BaseActivity(), MainView, NavigationToolbar.OnToolbarClickL
     override fun onCreate(savedInstanceState: Bundle?) {
         App.appComponent.inject(this)
         super.onCreate(savedInstanceState)
-        startDetailedWeather()
     }
 
     override fun onBackPressed() {
