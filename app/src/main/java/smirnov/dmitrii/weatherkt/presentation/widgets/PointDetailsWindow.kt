@@ -30,9 +30,7 @@ class PointDetailsWindow(private var context: Context, private val weather: Curr
 
         view.locationName.text = weather.name
 
-        val temp = weather.main?.temp?.toCelsiusString()
-
-        view.temperature.text = "$temp °C"
+        view.temperature.text = weather.main?.temp?.toCelsiusString()
         return view
 
     }
