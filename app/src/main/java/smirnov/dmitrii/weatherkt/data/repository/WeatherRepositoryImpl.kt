@@ -3,6 +3,8 @@ package smirnov.dmitrii.weatherkt.data.repository
 import smirnov.dmitrii.weatherkt.app.system.SchedulersProvider
 import smirnov.dmitrii.weatherkt.network.api.OpenWeatherMapApi
 import javax.inject.Inject
+import io.reactivex.SingleTransformer
+
 
 /**
  * @author Дмитрий
@@ -25,8 +27,7 @@ class WeatherRepositoryImpl @Inject constructor(
             lng,
             zip
     )
-            .subscribeOn(schedulers.io())
-            .observeOn(schedulers.ui())
+            .compose(applySingleSchedulers())
 
     override fun getDaysForecast(cityId: Long?,
                                  lat: Double?,
@@ -38,8 +39,7 @@ class WeatherRepositoryImpl @Inject constructor(
             lng,
             zip
     )
-            .subscribeOn(schedulers.io())
-            .observeOn(schedulers.ui())
+            .compose(applySingleSchedulers())
 
     override fun getWeeksForecast(cityName: String?,
                                   cityId: Long?,
@@ -55,7 +55,12 @@ class WeatherRepositoryImpl @Inject constructor(
             lng,
             zip
     )
-            .subscribeOn(schedulers.io())
-            .observeOn(schedulers.ui())
+            .compose(applySingleSchedulers())
+
+    fun <T> applySingleSchedulers(): SingleTransformer<T, T> = SingleTransformer { single ->
+        single
+                .subscribeOn(schedulers.io())
+                .observeOn(schedulers.ui())
+    }
 
 }
