@@ -20,10 +20,10 @@ class WeatherInteractorImpl @Inject constructor(private val weatherRepository: W
     ) = weatherRepository.getCurrentLocationWeather(
             cityName = cityName)
 
-    override fun getDaysForecast(cityId: Long,
-                        latitude: Double,
-                        longitude: Double,
-                        zipCode: String
+    override fun getDaysForecast(cityId: Long?,
+                        latitude: Double?,
+                        longitude: Double?,
+                        zipCode: String?
     ) = weatherRepository.getDaysForecast(
             cityId = cityId,
             lat = latitude,

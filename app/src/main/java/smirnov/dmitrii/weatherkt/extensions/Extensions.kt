@@ -5,6 +5,7 @@ import android.view.View
 import android.view.animation.AnimationUtils
 import smirnov.dmitrii.weatherkt.R
 import smirnov.dmitrii.weatherkt.app.App
+import smirnov.dmitrii.weatherkt.entity.openweathermap.Wind
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -21,6 +22,15 @@ fun Double.toCelsiusString(): String {
     val result = Math.round(this - 273.15)
     return result.toString() + App.appContext.getString(R.string.celsius)
 }
+
+fun Double.toDirectionString(): String = String.format(App.appContext.getString(R.string.direction),
+        this.toDegreeString())
+
+fun Double.toSpeedString(): String = String.format(App.appContext.getString(R.string.speed),
+        this.toString(), App.appContext.getString(R.string.speedUnit))
+
+fun Wind.toWindString(): String = String.format(App.appContext.getString(R.string.wind_short),
+        this.deg?.toDegreeString(), this.speed.toString(), App.appContext.getString(R.string.speedUnit))
 
 fun Double.toDegreeString(): String {
     val degree = this
@@ -50,6 +60,13 @@ fun String.toIconUrl(): String {
 @SuppressLint("SimpleDateFormat")
 fun Long.toTimeString(): String {
     val sdf = SimpleDateFormat("HH:mm")
-    val d = Date(this)
+    val d = Date(this * 1000L)
+    return sdf.format(d)
+}
+
+@SuppressLint("SimpleDateFormat")
+fun Long.toDateString(): String {
+    val sdf = SimpleDateFormat("dd MMM")
+    val d = Date(this * 1000L)
     return sdf.format(d)
 }

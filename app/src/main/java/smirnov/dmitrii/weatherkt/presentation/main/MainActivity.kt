@@ -103,7 +103,9 @@ class MainActivity : BaseActivity(), MainView, NavigationToolbar.OnToolbarClickL
     }
 
     override fun onSearchResult(tag: String, city: String?) {
-        if (city.isNullOrBlank()) return
+        if (city.isNullOrBlank()) {
+            toast(getString(R.string.error_empty_city))
+        }
 
         PreferenceManager
                 .getDefaultSharedPreferences(this)

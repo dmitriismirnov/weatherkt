@@ -16,12 +16,12 @@
 
             <TextView
                 android:id="@+id/city"
-                tools:text="City"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/default_margin"
                 android:layout_marginTop="@dimen/default_margin"
-                android:textSize="@dimen/text_size_default" />
+                android:textSize="@dimen/text_size_default"
+                tools:text="City" />
 
             <TextView
                 android:id="@+id/temperature"
@@ -40,6 +40,7 @@
                 android:layout_height="80dp"
                 android:layout_alignBottom="@id/temperature"
                 android:layout_alignTop="@id/temperature"
+                android:layout_marginStart="@dimen/default_margin"
                 android:layout_toEndOf="@id/temperature"
                 android:scaleType="fitStart"
                 tools:src="@drawable/v_ic_weather" />
@@ -48,8 +49,9 @@
                 android:id="@+id/temperature_min"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignEnd="@id/temperature"
                 android:layout_below="@id/temperature"
-                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginEnd="@dimen/default_margin"
                 android:textSize="@dimen/text_size_small"
                 tools:text="@string/min" />
 
@@ -57,8 +59,9 @@
                 android:id="@+id/temperature_max"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignEnd="@id/temperature"
                 android:layout_below="@id/temperature_min"
-                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginEnd="@dimen/default_margin"
                 android:layout_marginTop="@dimen/small_margin"
                 android:textSize="@dimen/text_size_small"
                 tools:text="@string/max" />
@@ -68,7 +71,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/weather_icon"
-                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginStart="@dimen/big_margin"
                 android:layout_toEndOf="@id/temperature"
                 android:gravity="center"
                 android:textSize="@dimen/text_size_default"
@@ -82,7 +85,7 @@
                 android:layout_marginLeft="@dimen/default_margin"
                 android:layout_marginRight="@dimen/default_margin"
                 android:layout_marginTop="@dimen/default_margin"
-                android:background="@color/colorPrimaryDark" />
+                android:background="@color/app_text_color" />
 
             <TextView
                 android:id="@+id/wind"
@@ -92,7 +95,7 @@
                 android:layout_marginStart="@dimen/default_margin"
                 android:layout_marginTop="@dimen/default_margin"
                 android:textSize="@dimen/text_size_small"
-                tools:text="@string/wind" />
+                android:text="@string/wind" />
 
             <TextView
                 android:id="@+id/wind_speed"
@@ -109,8 +112,8 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/wind_speed"
                 android:layout_marginStart="@dimen/default_margin"
-                tools:text="@string/direction"
-                android:textSize="@dimen/text_size_small" />
+                android:textSize="@dimen/text_size_small"
+                tools:text="@string/direction" />
 
             <TextView
                 android:id="@+id/humidity"
@@ -119,8 +122,8 @@
                 android:layout_alignParentEnd="true"
                 android:layout_below="@id/divider"
                 android:layout_margin="@dimen/default_margin"
-                tools:text="@string/humidity"
-                android:textSize="@dimen/text_size_small" />
+                android:textSize="@dimen/text_size_small"
+                tools:text="@string/humidity" />
 
             <TextView
                 android:id="@+id/pressure"
@@ -129,28 +132,19 @@
                 android:layout_alignParentEnd="true"
                 android:layout_below="@id/wind_speed"
                 android:layout_marginEnd="@dimen/default_margin"
-                tools:text="@string/pressure"
-                android:textSize="@dimen/text_size_small" />
+                android:textSize="@dimen/text_size_small"
+                tools:text="@string/pressure" />
 
-
-            <TextView
-                android:id="@+id/sunrise"
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/hours_forecast_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/wind_deg"
-                android:layout_marginStart="@dimen/default_margin"
+                android:layout_below="@id/pressure"
+                android:layout_marginBottom="@dimen/default_margin"
                 android:layout_marginTop="@dimen/default_margin"
-                tools:text="@string/sunrise"
-                android:textSize="@dimen/text_size_small" />
-
-            <TextView
-                android:id="@+id/sunset"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/sunrise"
-                android:layout_marginStart="@dimen/default_margin"
-                tools:text="@string/sunset"
-                android:textSize="@dimen/text_size_small" />
+                android:orientation="horizontal"
+                app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_hours_forecast" />
         </RelativeLayout>
     </android.support.v4.widget.SwipeRefreshLayout>
 

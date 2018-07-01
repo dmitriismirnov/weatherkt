@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Прогноз Погоды</string>
-    <string name="speed">скорость: %1$s%2$s</string>
+    <string name="speed">скорость: %1$s %2$s</string>
     <string name="speedUnit">м/с</string>
-    <string name="direction">направление: %1$s%2$s</string>
-    <string name="wind">Ветер: %1$s</string>
-    <string name="pressure">Давление: %1$s%2$s</string>
+    <string name="direction">направление: %1$s</string>
+    <string name="wind">Ветер:</string>
+    <string name="pressure">Давление: %1$s %2$s</string>
     <string name="pressureUnit">кПа</string>
     <string name="humidity">Влажность: %1$s%2$s</string>
     <string name="enter_city">Введите город</string>
@@ -27,4 +27,6 @@
     <string name="city">Город</string>
     <string name="country">Страна</string>
     <string name="saint_petersburg">Санкт-Петербург</string>
+    <string name="wind_short">Ветер: %1$s, %2$s %3$s</string>
+    <string name="error_empty_city">Город не был выбран</string>
 </resources>
