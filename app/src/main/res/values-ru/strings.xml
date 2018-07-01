@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Прогноз Погоды</string>
+    <string name="speed">скорость: %1$s%2$s</string>
+    <string name="speedUnit">м/с</string>
+    <string name="direction">направление: %1$s%2$s</string>
+    <string name="wind">Ветер: %1$s</string>
+    <string name="pressure">Давление: %1$s%2$s</string>
+    <string name="pressureUnit">кПа</string>
+    <string name="humidity">Влажность: %1$s%2$s</string>
+    <string name="enter_city">Введите город</string>
+    <string name="description">Описание</string>
+    <string name="min">мин %1$s</string>
+    <string name="max">макс %1$s</string>
+    <string name="sunrise">Восход: %1$s</string>
+    <string name="sunset">Закат: %1$s</string>
+    <string name="unknown">Н/Д</string>
+    <string name="drawer_title_weather">Погода</string>
+    <string name="drawer_title_map">Карта</string>
+    <string name="search_dialog_hint">Введите город</string>
+    <string name="search_dialog_title">Смена локации</string>
+    <string name="current_weather">Погода сейчас</string>
+    <string name="north">С</string>
+    <string name="east">В</string>
+    <string name="west">З</string>
+    <string name="south">Ю</string>
+    <string name="city">Город</string>
+    <string name="country">Страна</string>
+    <string name="saint_petersburg">Санкт-Петербург</string>
+</resources>

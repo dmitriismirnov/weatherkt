@@ -58,7 +58,7 @@ class SearchDialog : DialogFragment() {
         private const val NEGATIVE_TEXT = "negative_text"
         private const val TAG = "tag"
 
-        fun newInstants(
+        fun newInstance(
                 title: String? = null,
                 msg: String,
                 positive: String? = null,
@@ -77,6 +77,6 @@ class SearchDialog : DialogFragment() {
     }
 
     interface OnClickListener {
-        fun onSearchResult(tag: String, city: String)
+        fun onSearchResult(tag: String, city: String?)
     }
 }

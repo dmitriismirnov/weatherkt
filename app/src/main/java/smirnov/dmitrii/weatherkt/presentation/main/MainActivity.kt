@@ -1,6 +1,5 @@
 package smirnov.dmitrii.weatherkt.presentation.main
 
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.support.v4.view.GravityCompat
@@ -93,7 +92,7 @@ class MainActivity : BaseActivity(), MainView, NavigationToolbar.OnToolbarClickL
 
     override fun showSearchCity() {
         SearchDialog
-                .newInstants(
+                .newInstance(
                         getString(R.string.search_dialog_title),
                         getString(R.string.search_dialog_hint),
                         getString(android.R.string.ok),
@@ -103,7 +102,9 @@ class MainActivity : BaseActivity(), MainView, NavigationToolbar.OnToolbarClickL
 
     }
 
-    override fun onSearchResult(tag: String, city: String) {
+    override fun onSearchResult(tag: String, city: String?) {
+        if (city.isNullOrBlank()) return
+
         PreferenceManager
                 .getDefaultSharedPreferences(this)
                 .edit()

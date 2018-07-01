@@ -4,6 +4,8 @@ import android.content.SharedPreferences
 import android.util.Log
 import com.arellomobile.mvp.InjectViewState
 import io.reactivex.functions.Consumer
+import smirnov.dmitrii.weatherkt.R
+import smirnov.dmitrii.weatherkt.app.App
 import smirnov.dmitrii.weatherkt.data.interaction.WeatherInteractor
 import smirnov.dmitrii.weatherkt.entity.openweathermap.CurrentWeather
 import smirnov.dmitrii.weatherkt.presentation.base.BasePresenter
@@ -26,7 +28,7 @@ class DetailsPresenter @Inject constructor(
     fun requestWeather() {
         viewState.showProgress(true)
         weatherInteractor
-                .getCityWeather(preferences.getString(PREFS_CITY, "Saint Petersburg"))
+                .getCityWeather(preferences.getString(PREFS_CITY, App.appContext.getString(R.string.saint_petersburg)))
                 .subscribe(
                         { onSuccess(it) },
                         { onFail(it) }

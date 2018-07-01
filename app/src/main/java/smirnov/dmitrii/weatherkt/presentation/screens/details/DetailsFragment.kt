@@ -35,8 +35,6 @@ class DetailsFragment : BaseFragment(), DetailsView {
     @ProvidePresenter
     fun providePresenter() = presenter
 
-    private var currentCity = "Saint Petersburg"
-
     override fun onCreate(savedInstanceState: Bundle?) {
         App.appComponent.inject(this)
         super.onCreate(savedInstanceState)
