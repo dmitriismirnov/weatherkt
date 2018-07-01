@@ -3,7 +3,7 @@ package smirnov.dmitrii.weatherkt.di.module
 import dagger.Binds
 import dagger.Module
 import smirnov.dmitrii.weatherkt.data.repository.WeatherRepository
-import smirnov.dmitrii.weatherkt.data.repository.WeatherRepositoryImpl
+import smirnov.dmitrii.weatherkt.data.repository.WeatherRepositoryRemote
 import javax.inject.Singleton
 
 /**
@@ -14,5 +14,5 @@ import javax.inject.Singleton
 abstract class RepositoryModule {
     @Singleton
     @Binds
-    abstract fun bindWeatherRepository(weatherRepository: WeatherRepositoryImpl) : WeatherRepository
+    abstract fun bindWeatherRepository(weatherRepository: WeatherRepositoryRemote) : WeatherRepository
 }

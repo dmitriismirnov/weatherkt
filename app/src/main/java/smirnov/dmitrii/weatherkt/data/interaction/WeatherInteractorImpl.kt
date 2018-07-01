@@ -2,7 +2,6 @@ package smirnov.dmitrii.weatherkt.data.interaction
 
 import smirnov.dmitrii.weatherkt.data.repository.WeatherRepository
 import javax.inject.Inject
-import smirnov.dmitrii.weatherkt.data.repository.WeatherRepositoryImpl
 
 /**
  * @author Дмитрий

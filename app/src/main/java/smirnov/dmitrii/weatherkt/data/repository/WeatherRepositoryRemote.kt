@@ -10,7 +10,7 @@ import io.reactivex.SingleTransformer
  * @author Дмитрий
  * @version 03.06.2018.
  */
-class WeatherRepositoryImpl @Inject constructor(
+class WeatherRepositoryRemote @Inject constructor(
         private val api: OpenWeatherMapApi,
         private val schedulers: SchedulersProvider
 ) : WeatherRepository {
